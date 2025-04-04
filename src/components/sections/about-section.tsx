@@ -1,5 +1,4 @@
 "use client";
-
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -13,6 +12,7 @@ export default function AboutSection() {
     offset: ["start end", "end start"],
   });
 
+  // Map scroll progress to animation values for a smooth effect
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.6], [0, 1, 1]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
@@ -23,10 +23,10 @@ export default function AboutSection() {
       ref={ref}
       className="relative py-24 overflow-hidden bg-gradient-to-b from-secondary/10 to-secondary/40"
     >
-      {/* NEW: Innovative particulate background layer */}
+      {/* Particulate background layer */}
       <ParticlesBackground />
 
-      {/* Existing animated background circles */}
+      {/* Animated background circles */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(8)].map((_, i) => (
           <motion.div
@@ -60,7 +60,7 @@ export default function AboutSection() {
           className="flex flex-col lg:flex-row items-center justify-between gap-12"
           style={{ opacity }}
         >
-          {/* Avatar Image with advanced animations */}
+          {/* Avatar image with animated overlay and decorative effects */}
           <motion.div
             ref={imageRef}
             className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 group"
@@ -70,7 +70,7 @@ export default function AboutSection() {
             viewport={{ once: true }}
             style={{ y, scale }}
           >
-            {/* Decorative animated circles */}
+            {/* Rotating dashed border */}
             <motion.div 
               className="absolute inset-0 rounded-full border-4 border-dashed border-primary/40"
               animate={{ 
@@ -82,7 +82,7 @@ export default function AboutSection() {
                 scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
               }}
             />
-            
+            {/* Rotating solid border */}
             <motion.div 
               className="absolute inset-0 rounded-full border-2 border-primary/30"
               animate={{ 
@@ -95,84 +95,71 @@ export default function AboutSection() {
               }}
             />
 
-           {/* Contact Items positioned around the avatar */}
-<ContactItem 
-  Icon={Mail} 
-  text="rohanvatscse2025@gmail.com" 
-  href="mailto:rohanvatscse2025@gmail.com"
-  position="top"
-  className="opacity-0 group-hover:opacity-100"
-/>
-<ContactItem 
-  Icon={Phone} 
-  text="+91 7903235478" 
-  href="tel:+917903235478"
-  position="right"
-  className="opacity-0 group-hover:opacity-100"
-/>
-<ContactItem 
-  Icon={MapPin} 
-  text="Bangalore, India" 
-  position="bottom"
-  className="opacity-0 group-hover:opacity-100"
-/>
-<ContactItem 
-  Icon={Github} 
-  text="GitHub" 
-  href="https://github.com/RohanVatsDev"
-  position="left"
-  className="opacity-0 group-hover:opacity-100"
-/>
-<ContactItem 
-  Icon={Linkedin} 
-  text="LinkedIn" 
-  href="https://linkedin.com/in/rohan-vats"
-  position="top-right"
-  className="opacity-0 group-hover:opacity-100"
-/>
-<ContactItem 
-  Icon={MapPin} 
-  text="Portfolio" 
-  href="https://rohanvats.dev"
-  position="bottom-left"
-  className="opacity-0 group-hover:opacity-100"
-/>
+            {/* Contact icons positioned around the avatar */}
+            <ContactItem 
+              Icon={Mail} 
+              text="rohanvatscse2025@gmail.com" 
+              href="mailto:rohanvatscse2025@gmail.com"
+              position="top"
+              className="opacity-0 group-hover:opacity-100"
+            />
+            <ContactItem 
+              Icon={Phone} 
+              text="+91 7903235478" 
+              href="tel:+917903235478"
+              position="right"
+              className="opacity-0 group-hover:opacity-100"
+            />
+            <ContactItem 
+              Icon={MapPin} 
+              text="Bangalore, India" 
+              position="bottom"
+              className="opacity-0 group-hover:opacity-100"
+            />
+            <ContactItem 
+              Icon={Github} 
+              text="GitHub" 
+              href="https://github.com/RohanVatsDev"
+              position="left"
+              className="opacity-0 group-hover:opacity-100"
+            />
+            <ContactItem 
+              Icon={Linkedin} 
+              text="LinkedIn" 
+              href="https://linkedin.com/in/rohan-vats"
+              position="top-right"
+              className="opacity-0 group-hover:opacity-100"
+            />
+            <ContactItem 
+              Icon={MapPin} 
+              text="Portfolio" 
+              href="https://rohanvats.dev"
+              position="bottom-left"
+              className="opacity-0 group-hover:opacity-100"
+            />
 
-
-            {/* Image container with overlay effects */}
+            {/* Image container with gradient overlay */}
             <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-primary/30 shadow-lg shadow-primary/20 transition-all duration-300">
               <motion.div 
                 className="absolute inset-0 bg-gradient-to-b from-primary/0 via-primary/20 to-primary/50 z-10"
-                animate={{
-                  opacity: [0.5, 0.8, 0.5],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut"
-                }}
+                animate={{ opacity: [0.5, 0.8, 0.5] }}
+                transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
               />
-              
               <Image
                 src="/images/dp.png?text=RV"
                 alt="Rohan Vats"
                 fill
                 className="object-cover object-top transition-transform duration-500 group-hover:scale-110 rounded-full"
               />
-
               <motion.div 
                 className="absolute -bottom-20 left-1/2 -translate-x-1/2 text-center z-20 bg-black/50 px-4 py-2 rounded-full backdrop-blur-sm"
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
-              >
-                <h3 className="font-bold text-xl text-white">Rohan Vats</h3>
-                <p className="text-sm text-white/80">Software Developer</p>
-              </motion.div>
+              />
             </div>
             
-            {/* Floating particles around the avatar */}
+            {/* Floating particles effect around the avatar */}
             {[...Array(6)].map((_, i) => (
               <motion.div
                 key={i}
@@ -198,7 +185,7 @@ export default function AboutSection() {
             ))}
           </motion.div>
 
-          {/* Bio Content with animated headings and paragraphs */}
+          {/* Biography and information content */}
           <motion.div
             className="flex-1 max-w-2xl"
             initial={{ opacity: 0 }}
@@ -230,7 +217,7 @@ export default function AboutSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              I'm a passionate software developer specializing in developing intelligent software solutions. With expertise in Python, Java, Django, and AI/ML technologies, I create efficient, scalable applications that solve real-world problems.
+              I'm a passionate software developer specializing in intelligent software solutions. With expertise in Python, Java, Django, and AI/ML technologies, I build efficient, scalable applications that solve real-world problems.
             </motion.p>
 
             <motion.p 
@@ -240,7 +227,7 @@ export default function AboutSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              My journey in technology began with a fascination for how software can transform ideas into impactful tools. Today, I combine technical skills with creative problem-solving to build innovative solutions that make a difference.
+              My journey in technology began with a fascination for transforming ideas into impactful tools. Today, I combine technical skills with creative problem-solving to build innovative solutions.
             </motion.p>
 
             <motion.div 
@@ -260,15 +247,15 @@ export default function AboutSection() {
   );
 }
 
-// New ParticlesBackground component
+// Particle background component for added visual depth
 function ParticlesBackground() {
   const particleCount = 20;
   const particles = Array.from({ length: particleCount }, (_, i) => ({
     id: i,
     top: Math.random() * 100,
     left: Math.random() * 100,
-    size: Math.random() * 4 + 2, // Size between 2px and 6px
-    duration: Math.random() * 10 + 5, // Duration between 5s and 15s
+    size: Math.random() * 4 + 2,
+    duration: Math.random() * 10 + 5,
     delay: Math.random() * 5,
     xRange: Math.random() * 100 - 50,
     yRange: Math.random() * 100 - 50,
@@ -304,7 +291,7 @@ function ParticlesBackground() {
   );
 }
 
-// ContactItem component for positioning contact icons around the avatar
+// Component for displaying contact icons around the avatar
 function ContactItem({ Icon, text, href, position, className = "" }) {
   const positionStyles = {
     top: "absolute -top-16 left-1/2 -translate-x-1/2 transition-all duration-500 group-hover:-top-20",
@@ -329,7 +316,6 @@ function ContactItem({ Icon, text, href, position, className = "" }) {
   };
 
   const delay = animationOrder[position] * 0.05;
-
   const containerClasses = `${positionStyles[position]} ${className} transition-opacity duration-300 flex flex-col items-center z-30`;
 
   const Content = () => (
@@ -368,7 +354,7 @@ function ContactItem({ Icon, text, href, position, className = "" }) {
   );
 }
 
-// InfoCard component with animated border and glow effect
+// Component for displaying information cards with animated effects
 function InfoCard({ title, content, subcontent }) {
   return (
     <motion.div
@@ -376,7 +362,7 @@ function InfoCard({ title, content, subcontent }) {
       whileHover={{ scale: 1.03 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Animated border */}
+      {/* Animated border effect */}
       <motion.div
         className="absolute inset-0"
         initial={{ opacity: 0 }}
@@ -386,10 +372,7 @@ function InfoCard({ title, content, subcontent }) {
         <div className="absolute inset-0 rounded-lg overflow-hidden">
           <motion.div
             className="absolute h-[500%] w-[500%]"
-            style={{
-              top: "-200%",
-              left: "-200%",
-            }}
+            style={{ top: "-200%", left: "-200%" }}
           >
             <motion.div
               className="absolute top-0 left-0 right-0 bottom-0"
@@ -410,10 +393,7 @@ function InfoCard({ title, content, subcontent }) {
       <motion.div
         className="absolute inset-0 rounded-lg bg-primary/0"
         initial={{ opacity: 0 }}
-        whileHover={{
-          opacity: 0.1,
-          boxShadow: "inset 0 0 20px rgba(var(--primary-rgb), 0.4)",
-        }}
+        whileHover={{ opacity: 0.1, boxShadow: "inset 0 0 20px rgba(var(--primary-rgb), 0.4)" }}
         transition={{ duration: 0.3 }}
       />
 

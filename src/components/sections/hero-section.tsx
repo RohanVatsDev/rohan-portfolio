@@ -2,27 +2,24 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-// Assuming Button is imported from your UI library (e.g., shadcn/ui)
-// import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, ArrowDown, MoveRight, Code, Download } from "lucide-react"; // Added Download
+import { Github, Linkedin, Mail, ArrowDown, MoveRight, Code, Download } from "lucide-react";
 import * as THREE from "three";
 
-// --- Mock Button Component (Keep as is or use your actual Button) ---
+// Mock Button Component (replace with your actual Button if available)
 const Button = ({ children, variant, size, className, asChild, ...props }) => {
   const Tag = asChild ? motion.a : motion.button;
-
-  const baseStyle = "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background";
+  const baseStyle =
+    "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background";
   const sizeStyle = size === "lg" ? "h-11 px-8 py-3 text-lg" : "h-10 px-4 py-2";
-  const variantStyle = variant === "outline"
-    ? "border border-input hover:bg-accent hover:text-accent-foreground backdrop-blur-sm" // Added backdrop-blur
-    : "bg-primary text-primary-foreground hover:bg-primary/90";
-
+  const variantStyle =
+    variant === "outline"
+      ? "border border-input hover:bg-accent hover:text-accent-foreground backdrop-blur-sm"
+      : "bg-primary text-primary-foreground hover:bg-primary/90";
   const combinedClassName = `${baseStyle} ${sizeStyle} ${variantStyle} ${className || ""}`;
-
-  const motionProps = Tag === motion.a || Tag === motion.button ? {
-    whileHover: { scale: 1.05, transition: { duration: 0.2, ease: "easeInOut" } }, // Smoother ease
+  const motionProps = {
+    whileHover: { scale: 1.05, transition: { duration: 0.2, ease: "easeInOut" } },
     whileTap: { scale: 0.95, transition: { duration: 0.1 } },
-  } : {};
+  };
 
   return (
     <Tag className={combinedClassName} {...motionProps} {...props}>
@@ -30,10 +27,8 @@ const Button = ({ children, variant, size, className, asChild, ...props }) => {
     </Tag>
   );
 };
-// --- End Mock Button Component ---
 
-
-// --- CosmicBackground Component (Keep as is) ---
+// CosmicBackground renders a dynamic starry background using Three.js
 const CosmicBackground = () => {
   const containerRef = useRef(null);
 
@@ -55,44 +50,41 @@ const CosmicBackground = () => {
     currentRef.appendChild(renderer.domElement);
 
     const starLayers = [
-        { count: 2000, size: 0.06, speedFactor: 0.00005, zRange: 1000 },
-        { count: 1500, size: 0.08, speedFactor: 0.00008, zRange: 800 },
-        { count: 1000, size: 0.1, speedFactor: 0.0001, zRange: 600 },
+      { count: 2000, size: 0.06, speedFactor: 0.00005, zRange: 1000 },
+      { count: 1500, size: 0.08, speedFactor: 0.00008, zRange: 800 },
+      { count: 1000, size: 0.1, speedFactor: 0.0001, zRange: 600 },
     ];
     const starGroups = [];
 
-    starLayers.forEach(layer => {
-        const starGeometry = new THREE.BufferGeometry();
-        const starMaterial = new THREE.PointsMaterial({
-            color: 0xffffff,
-            size: layer.size,
-            transparent: true,
-            opacity: 0.8,
-            sizeAttenuation: true,
-            blending: THREE.AdditiveBlending,
-        });
-        const starVertices = [];
-        for (let i = 0; i < layer.count; i++) {
-            const radius = Math.random() * layer.zRange;
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.acos((Math.random() * 2) - 1);
-            const x = radius * Math.sin(phi) * Math.cos(theta);
-            const y = radius * Math.sin(phi) * Math.sin(theta);
-            const z = radius * Math.cos(phi);
-            if (Math.sqrt(x*x + y*y + z*z) > 5) {
-                starVertices.push(x, y, z);
-            } else {
-                 const scaleFactor = 10 / Math.sqrt(x*x + y*y + z*z);
-                 starVertices.push(x * scaleFactor, y * scaleFactor, z * scaleFactor);
-            }
+    starLayers.forEach((layer) => {
+      const starGeometry = new THREE.BufferGeometry();
+      const starMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: layer.size,
+        transparent: true,
+        opacity: 0.8,
+        sizeAttenuation: true,
+        blending: THREE.AdditiveBlending,
+      });
+      const starVertices = [];
+      for (let i = 0; i < layer.count; i++) {
+        const radius = Math.random() * layer.zRange;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(Math.random() * 2 - 1);
+        const x = radius * Math.sin(phi) * Math.cos(theta);
+        const y = radius * Math.sin(phi) * Math.sin(theta);
+        const z = radius * Math.cos(phi);
+        if (Math.sqrt(x * x + y * y + z * z) > 5) {
+          starVertices.push(x, y, z);
+        } else {
+          const scaleFactor = 10 / Math.sqrt(x * x + y * y + z * z);
+          starVertices.push(x * scaleFactor, y * scaleFactor, z * scaleFactor);
         }
-        starGeometry.setAttribute(
-            "position",
-            new THREE.Float32BufferAttribute(starVertices, 3)
-        );
-        const stars = new THREE.Points(starGeometry, starMaterial);
-        scene.add(stars);
-        starGroups.push({ points: stars, speedFactor: layer.speedFactor });
+      }
+      starGeometry.setAttribute("position", new THREE.Float32BufferAttribute(starVertices, 3));
+      const stars = new THREE.Points(starGeometry, starMaterial);
+      scene.add(stars);
+      starGroups.push({ points: stars, speedFactor: layer.speedFactor });
     });
 
     const handleResize = () => {
@@ -116,9 +108,9 @@ const CosmicBackground = () => {
     let animationFrameId;
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      starGroups.forEach(group => {
-          group.points.rotation.y += group.speedFactor;
-          group.points.rotation.x += group.speedFactor * 0.5;
+      starGroups.forEach((group) => {
+        group.points.rotation.y += group.speedFactor;
+        group.points.rotation.x += group.speedFactor * 0.5;
       });
       camera.position.x += (targetCameraOffset.x * 0.5 - camera.position.x) * 0.02;
       camera.position.y += (targetCameraOffset.y * 0.5 - camera.position.y) * 0.02;
@@ -133,26 +125,29 @@ const CosmicBackground = () => {
       cancelAnimationFrame(animationFrameId);
       if (currentRef && renderer.domElement) {
         try {
-            currentRef.removeChild(renderer.domElement);
+          currentRef.removeChild(renderer.domElement);
         } catch (e) {
-            console.warn("Could not remove renderer DOM element:", e);
+          console.warn("Could not remove renderer DOM element:", e);
         }
       }
-      starGroups.forEach(group => {
-          group.points.geometry?.dispose();
-          group.points.material?.dispose();
+      starGroups.forEach((group) => {
+        group.points.geometry?.dispose();
+        group.points.material?.dispose();
       });
       renderer.dispose();
       scene.clear();
     };
   }, []);
 
-  return <div ref={containerRef} className="absolute inset-0 -z-10 overflow-hidden bg-gradient-to-b from-gray-900 via-black to-black" />;
+  return (
+    <div
+      ref={containerRef}
+      className="absolute inset-0 -z-10 overflow-hidden bg-gradient-to-b from-gray-900 via-black to-black"
+    />
+  );
 };
-// --- End CosmicBackground Component ---
 
-
-// --- Updated Hero Section Component ---
+// HeroSection Component with animated titles, CTAs, and a cosmic background
 export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
 
@@ -168,28 +163,18 @@ export default function HeroSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    }
+      transition: { staggerChildren: 0.2, duration: 0.5, ease: "easeOut" },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 25 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
-  // --- Configuration ---
-  const resumeFilename = "Rohan_Vats_Resume.pdf"; // The actual name of your resume file in /public
-  const resumeDownloadName = "Rohan_Vats_Resume.pdf"; // Suggested name for the downloaded file
-  // --- End Configuration ---
-
+  // Resume file configuration (ensure the file exists in /public)
+  const resumeFilename = "Rohan_Vats_Resume.pdf";
+  const resumeDownloadName = "Rohan_Vats_Resume.pdf";
 
   return (
     <section
@@ -212,45 +197,34 @@ export default function HeroSection() {
           Rohan Vats
         </motion.h1>
 
-        <motion.p
-          className="text-xl sm:text-2xl md:text-3xl text-slate-300 mb-8 font-light"
-          variants={itemVariants}
-        >
+        <motion.p className="text-xl sm:text-2xl md:text-3xl text-slate-300 mb-8 font-light" variants={itemVariants}>
           Software Developer & Creative Technologist
         </motion.p>
 
-         <motion.h2
-          className="text-md sm:text-lg md:text-xl text-slate-400 mb-10 max-w-xl"
-          variants={itemVariants}
-        >
+        <motion.h2 className="text-md sm:text-lg md:text-xl text-slate-400 mb-10 max-w-xl" variants={itemVariants}>
           Turning complex problems into elegant software solutions using Python, Java, and modern web technologies.
         </motion.h2>
 
-        <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-6"
-          variants={itemVariants}
-        >
-          {/* Primary CTA: Download Resume */}
+        <motion.div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-6" variants={itemVariants}>
           <Button
             size="lg"
             className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white shadow-lg shadow-blue-500/40 hover:shadow-blue-600/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1"
             asChild
-            href={`/${resumeFilename}`} // Link to the resume in the public folder
-            download={resumeDownloadName} // Trigger download and suggest filename
+            href={`/${resumeFilename}`}
+            download={resumeDownloadName}
           >
             <>
-              <Download className="mr-2 h-5 w-5" /> {/* Use Download icon */}
-              Download Resume {/* Updated Text */}
+              <Download className="mr-2 h-5 w-5" />
+              Download Resume
             </>
           </Button>
 
-          {/* Secondary CTA: Get In Touch */}
           <Button
             size="lg"
             variant="outline"
             className="border-slate-500 text-slate-300 hover:bg-slate-800/60 hover:border-slate-400 hover:text-white backdrop-blur-sm transition-all duration-300 ease-in-out transform hover:-translate-y-1"
             asChild
-            href="#contact" // Link to contact section (adjust ID if needed)
+            href="#contact"
           >
             <>
               <MoveRight className="mr-2 h-5 w-5" />
@@ -260,7 +234,6 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Down Indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
         initial={{ opacity: 0, y: -10 }}
@@ -268,20 +241,14 @@ export default function HeroSection() {
         transition={{ delay: 1.5, duration: 0.8 }}
       >
         <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                repeatDelay: 0.5
-            }}
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.5 }}
         >
-            <a href="#about" aria-label="Scroll down"> {/* Link to next section */}
-              <ArrowDown className="h-6 w-6 text-slate-400 hover:text-slate-200 transition-colors" />
-            </a>
+          <a href="#about" aria-label="Scroll down">
+            <ArrowDown className="h-6 w-6 text-slate-400 hover:text-slate-200 transition-colors" />
+          </a>
         </motion.div>
       </motion.div>
-
     </section>
   );
 }

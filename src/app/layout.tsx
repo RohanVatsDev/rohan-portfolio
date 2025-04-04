@@ -21,12 +21,12 @@ export const metadata: Metadata = {
   keywords: ["Software Developer", "Full Stack", "AI", "Python", "Java", "Django"],
   creator: "Rohan Vats",
   icons: {
-    icon: "/rohan.png", // ✅ Favicon set for deployment
+    icon: "/rohan.png",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://rohanvats.codifyu.com", // ✅ Replace with your final domain
+    url: "https://rohanvats.codifyu.com",
     title: "Rohan Vats | Software Developer",
     description: "Software Developer | AI & Full-Stack Innovator",
     siteName: "Rohan Vats Portfolio",
@@ -39,15 +39,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${spaceMono.variable} ${inter.variable}`}>
       <head>
-        {/* 👇 Manual favicon link for local testing */}
         <link rel="icon" href="/rohan.png" />
       </head>
       <body>

@@ -9,30 +9,33 @@ const achievements = [
   {
     year: "2024",
     title: "Winner – Agoric Fast Hack",
-    description: "🏆 Won ₹30,025 (350$) at my first-ever hackathon! A 36-hour marathon of coding and teamwork that taught me the power of perseverance. Pushed through challenges with my amazing team and claimed victory at midnight!",
+    description:
+      "🏆 Won ₹30,025 (350$) at my first-ever hackathon! A 36-hour marathon of coding and teamwork that taught me the power of perseverance. Pushed through challenges with my amazing team and claimed victory at midnight!",
     icon: <Trophy className="h-10 w-10 text-primary" />,
   },
   {
     year: "2024",
     title: "Top 40 – Code Conquest 1.0",
-    description: "Secured All India Rank 40 in Code Conquest 1.0, a national-level coding challenge among 5000+ participants. Solved tough algorithmic problems with focus and consistency.",
+    description:
+      "Secured All India Rank 40 in Code Conquest 1.0, a national-level coding challenge among 5000+ participants. Solved tough algorithmic problems with focus and consistency.",
     icon: <Award className="h-10 w-10 text-primary" />,
   },
   {
     year: "2024",
     title: "Google AI Event Attendee",
-    description: "Attended the 'Build with AI' event by Google Developers Group. Explored Google Cloud, Gemini, and Gen App Builder. Networked with AI enthusiasts and professionals from diverse domains.",
+    description:
+      "Attended the 'Build with AI' event by Google Developers Group. Explored Google Cloud, Gemini, and Gen App Builder. Networked with AI enthusiasts and professionals from diverse domains.",
     icon: <Users className="h-10 w-10 text-primary" />,
   },
   {
     year: "2023",
     title: "Coding Club Leadership",
-    description: "Led my college’s Coding Club in 2023, growing it from 15 to 60+ members. Conducted weekly problem-solving sessions, hackathons, and peer-to-peer learning activities.",
+    description:
+      "Led my college’s Coding Club in 2023, growing it from 15 to 60+ members. Conducted weekly problem-solving sessions, hackathons, and peer-to-peer learning activities.",
     icon: <Users className="h-10 w-10 text-primary" />,
     count: 60,
   },
 ];
-
 
 export default function AchievementsSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -41,15 +44,12 @@ export default function AchievementsSection() {
     offset: ["start end", "end start"],
   });
 
+  // Map scroll progress to vertical movement and opacity for a smooth reveal effect
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const opacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1]);
 
   return (
-    <section
-      id="achievements"
-      ref={ref}
-      className="py-24"
-    >
+    <section id="achievements" ref={ref} className="py-24">
       <div className="container mx-auto px-4">
         <motion.div
           className="text-center mb-16"
@@ -93,10 +93,8 @@ export default function AchievementsSection() {
                     <Calendar className="h-4 w-4 text-primary" />
                     <span className="text-sm text-muted-foreground">{achievement.year}</span>
                   </div>
-
                   <h3 className="text-xl font-bold mb-2">{achievement.title}</h3>
                   <p className="text-muted-foreground">{achievement.description}</p>
-
                   {achievement.count && (
                     <div className="mt-4">
                       <p className="text-sm text-muted-foreground">Members</p>
@@ -126,7 +124,7 @@ export default function AchievementsSection() {
   );
 }
 
-// Simple counter animation component
+// Animated counter component
 function CountUp({ end }: { end: number }) {
   const nodeRef = useRef<HTMLSpanElement>(null);
   const [count, setCount] = useState(0);
@@ -134,23 +132,17 @@ function CountUp({ end }: { end: number }) {
   useEffect(() => {
     let startTime: number;
     let animationFrame: number;
-    const duration = 2000; // 2 seconds
+    const duration = 2000; // 2 seconds duration for the count-up animation
 
     const updateCount = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const elapsedTime = timestamp - startTime;
       const progress = Math.min(elapsedTime / duration, 1);
-      const currentCount = Math.floor(progress * end);
-
-      setCount(currentCount);
-
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(updateCount);
-      }
+      setCount(Math.floor(progress * end));
+      if (progress < 1) animationFrame = requestAnimationFrame(updateCount);
     };
 
     animationFrame = requestAnimationFrame(updateCount);
-
     return () => cancelAnimationFrame(animationFrame);
   }, [end]);
 

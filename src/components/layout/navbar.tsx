@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -21,11 +20,12 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScroll();
 
+  // Update navbar style based on scroll position
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);
   });
 
-  // Close mobile menu when window is resized to desktop
+  // Close mobile menu when resizing to desktop view
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768 && isOpen) {
@@ -49,11 +49,8 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link
-          href="#home"
-          className="text-2xl font-bold gradient-text"
-        >
-          
+        <Link href="#home" className="text-2xl font-bold gradient-text">
+          {/* Logo placeholder */}
         </Link>
 
         {/* Desktop Navigation */}

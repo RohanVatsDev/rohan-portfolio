@@ -6,13 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Github, ExternalLink, Play, X } from "lucide-react";
 
-// Project data structure
+// Project data type and sample projects
 type Project = {
   id: string;
   title: string;
   description: string;
   category: "volunteer" | "internship";
-  video: string; // URL to demo video
+  video: string;
   technologies: string[];
   links: {
     github?: string;
@@ -22,12 +22,12 @@ type Project = {
   keyFeatures: string[];
 };
 
-// Projects data with demo video URLs added
 const projects: Project[] = [
   {
     id: "smart-farm",
     title: "Smart Farm Network Portal",
-    description: "A complete solution for farmers to connect with each other and streamline the supply chain from farm to table.",
+    description:
+      "A complete solution for farmers to connect and streamline the supply chain from farm to table.",
     category: "volunteer",
     video: "https://www.w3schools.com/html/mov_bbb.mp4",
     technologies: ["Python (Flask)", "MySQL", "JavaScript", "HTML", "CSS"],
@@ -39,13 +39,14 @@ const projects: Project[] = [
       "User management system",
       "Product catalog",
       "Order tracking",
-      "Financial reporting"
+      "Financial reporting",
     ],
   },
   {
     id: "ngo-database",
     title: "NGO Database Management",
-    description: "Comprehensive database management system with 19 interconnected tables to manage complex NGO data.",
+    description:
+      "Comprehensive database management system with 19 interconnected tables for complex NGO data.",
     category: "volunteer",
     video: "https://www.w3schools.com/html/mov_bbb.mp4",
     technologies: ["Python", "SQL", "JavaScript"],
@@ -56,13 +57,14 @@ const projects: Project[] = [
       "ER diagram visualization",
       "Data integrity checks",
       "Efficient querying",
-      "Complex data relationships"
+      "Complex data relationships",
     ],
   },
   {
     id: "sign-language-app",
     title: "Basic Sign Language App",
-    description: "Android application built to improve communication access for the hearing impaired through sign language recognition.",
+    description:
+      "Android application that improves communication access for the hearing impaired through sign language recognition.",
     category: "volunteer",
     video: "https://www.w3schools.com/html/mov_bbb.mp4",
     technologies: ["Android Studio", "Java", "XML"],
@@ -74,13 +76,14 @@ const projects: Project[] = [
       "Sign language recognition",
       "Text-to-speech conversion",
       "User-friendly interface",
-      "Offline functionality"
+      "Offline functionality",
     ],
   },
   {
     id: "sentiment-analysis",
     title: "Social Media Sentiment Analysis",
-    description: "Real-time sentiment analysis system using BERT for natural language processing, achieving 97% accuracy after training on 1.6 million tweets.",
+    description:
+      "Real-time sentiment analysis system using BERT for NLP, achieving 97% accuracy after training on 1.6 million tweets.",
     category: "internship",
     video: "https://www.w3schools.com/html/mov_bbb.mp4",
     technologies: ["Python", "BERT", "Flask API", "HTML/CSS/JS"],
@@ -91,7 +94,7 @@ const projects: Project[] = [
       "Real-time data processing",
       "Natural language processing",
       "User-friendly web interface",
-      "High accuracy predictions"
+      "High accuracy predictions",
     ],
   },
 ];
@@ -101,9 +104,8 @@ export default function ProjectsSection() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [flippedCards, setFlippedCards] = useState<{ [key: string]: boolean }>({});
 
-  const filteredProjects = activeCategory === "all"
-    ? projects
-    : projects.filter(project => project.category === activeCategory);
+  const filteredProjects =
+    activeCategory === "all" ? projects : projects.filter((p) => p.category === activeCategory);
 
   const categories = [
     { value: "all", label: "All Projects" },
@@ -112,10 +114,7 @@ export default function ProjectsSection() {
   ];
 
   const flipCard = (id: string) => {
-    setFlippedCards(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
+    setFlippedCards((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   return (
@@ -132,25 +131,22 @@ export default function ProjectsSection() {
             Featured <span className="text-primary">Projects</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            A selection of projects that showcase my skills and experience in software development, AI, and web applications.
+            A selection of projects showcasing my skills and experience in software development, AI, and web applications.
           </p>
-
-          {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-3 mt-8">
-            {categories.map((category) => (
+            {categories.map((cat) => (
               <Button
-                key={category.value}
-                variant={activeCategory === category.value ? "default" : "outline"}
-                onClick={() => setActiveCategory(category.value as any)}
-                className={`px-6 ${activeCategory === category.value ? "bg-primary" : "hover:bg-primary/10"}`}
+                key={cat.value}
+                variant={activeCategory === cat.value ? "default" : "outline"}
+                onClick={() => setActiveCategory(cat.value as any)}
+                className={`px-6 ${activeCategory === cat.value ? "bg-primary" : "hover:bg-primary/10"}`}
               >
-                {category.label}
+                {cat.label}
               </Button>
             ))}
           </div>
         </motion.div>
 
-        {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
           {filteredProjects.map((project, index) => (
             <motion.div
@@ -161,13 +157,12 @@ export default function ProjectsSection() {
               viewport={{ once: true }}
               className="h-[450px] w-full perspective"
             >
-              {/* 3D Card Container */}
-              <div 
-                className={`relative w-full h-full transition-transform duration-700 transform-style-3d cursor-pointer ${
-                  flippedCards[project.id] ? 'rotate-y-180' : ''
+              <div
+                className={`relative w-full h-full transform-style-3d transition-transform duration-700 cursor-pointer ${
+                  flippedCards[project.id] ? "rotate-y-180" : ""
                 }`}
               >
-                {/* Card Front */}
+                {/* Front Side */}
                 <div className="absolute inset-0 w-full h-full backface-hidden bg-card rounded-xl shadow-lg border border-border overflow-hidden">
                   <div className="relative h-1/2 w-full overflow-hidden">
                     <video
@@ -179,9 +174,7 @@ export default function ProjectsSection() {
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-                    
-                    {/* Play Video Button */}
-                    <button 
+                    <button
                       className="absolute top-4 right-4 bg-black/50 p-2 rounded-full text-white hover:bg-primary transition-colors"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -191,7 +184,6 @@ export default function ProjectsSection() {
                       <Play className="h-5 w-5" />
                     </button>
                   </div>
-                  
                   <div className="p-6 relative">
                     <h3 className="text-2xl font-bold mb-2 text-foreground">{project.title}</h3>
                     <p className="text-muted-foreground mb-4">{project.description}</p>
@@ -202,50 +194,45 @@ export default function ProjectsSection() {
                         </Badge>
                       ))}
                     </div>
-                    
-                    {/* Flip Card Hint */}
-                    <button 
+                    <button
                       onClick={() => flipCard(project.id)}
                       className="absolute bottom-6 right-6 group flex items-center gap-2 text-sm text-primary hover:text-primary/90 transition-all"
                     >
                       <span className="group-hover:underline">Flip for details</span>
-                      <motion.svg 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
+                      <motion.svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         animate={{ x: [0, 5, 0] }}
-                        transition={{ 
-                          repeat: Infinity, 
-                          repeatType: "reverse", 
+                        transition={{
+                          repeat: Infinity,
+                          repeatType: "reverse",
                           duration: 1.5,
-                          ease: "easeInOut" 
+                          ease: "easeInOut",
                         }}
                       >
-                        <path 
-                          d="M13 9L16 12M16 12L13 15M16 12H8" 
-                          stroke="currentColor" 
-                          strokeWidth="2" 
-                          strokeLinecap="round" 
+                        <path
+                          d="M13 9L16 12M16 12L13 15M16 12H8"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                       </motion.svg>
                     </button>
                   </div>
                 </div>
-                
-                {/* Card Back */}
+                {/* Back Side */}
                 <div className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 bg-card rounded-xl shadow-lg border border-primary p-6 flex flex-col">
-                  <button 
+                  <button
                     onClick={() => flipCard(project.id)}
                     className="absolute top-4 right-4 text-muted-foreground hover:text-primary transition-colors"
                   >
                     <X className="h-5 w-5" />
                   </button>
-                  
                   <h3 className="text-2xl font-bold mb-4 text-primary">{project.title}</h3>
-                  
                   <div className="mb-6">
                     <h4 className="text-lg font-semibold mb-2">Key Features</h4>
                     <ul className="space-y-2">
@@ -257,7 +244,6 @@ export default function ProjectsSection() {
                       ))}
                     </ul>
                   </div>
-                  
                   <div className="mt-auto flex flex-wrap gap-3">
                     {project.links.github && (
                       <Button variant="outline" size="sm" asChild className="gap-1">
@@ -291,9 +277,8 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* Full Screen Video Modal */}
       {activeVideo && (
-        <motion.div 
+        <motion.div
           className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -307,8 +292,8 @@ export default function ProjectsSection() {
               <X className="h-8 w-8" />
             </button>
             {projects
-              .filter(project => project.id === activeVideo)
-              .map(project => (
+              .filter((project) => project.id === activeVideo)
+              .map((project) => (
                 <video
                   key={project.id}
                   src={project.video}
@@ -320,21 +305,17 @@ export default function ProjectsSection() {
           </div>
         </motion.div>
       )}
-      
-      {/* CSS for 3D flip animation - must be added to your global CSS */}
+
       <style jsx global>{`
         .perspective {
           perspective: 1000px;
         }
-        
         .transform-style-3d {
           transform-style: preserve-3d;
         }
-        
         .backface-hidden {
           backface-visibility: hidden;
         }
-        
         .rotate-y-180 {
           transform: rotateY(180deg);
         }
