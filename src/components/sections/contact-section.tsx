@@ -66,19 +66,20 @@ export default function ContactSection() {
     {
       name: "GitHub",
       icon: <Github className="h-6 w-6" />,
-      url: "https://github.com/rohanvats",
+      url: "https://github.com/RohanVatsDev",
     },
     {
       name: "LinkedIn",
       icon: <Linkedin className="h-6 w-6" />,
-      url: "https://linkedin.com/in/rohanvats",
+      url: "https://linkedin.com/in/rohan-vats",
     },
     {
       name: "Email",
       icon: <Mail className="h-6 w-6" />,
-      url: "mailto:rohanvats2020@gmail.com",
+      url: "mailto:rohanvatscse2025@gmail.com",
     },
   ];
+  
 
   return (
     <section id="contact" className="py-24 bg-secondary/30">
@@ -140,7 +141,7 @@ export default function ContactSection() {
                       value={formState.name}
                       onChange={handleChange}
                       className="w-full px-4 py-3 rounded-md border border-border bg-background/50 focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                      placeholder="John Doe"
+                      placeholder="Rohan Vats"
                     />
                   </div>
 
@@ -156,7 +157,7 @@ export default function ContactSection() {
                       value={formState.email}
                       onChange={handleChange}
                       className="w-full px-4 py-3 rounded-md border border-border bg-background/50 focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                      placeholder="john@example.com"
+                      placeholder="rohanvats2020@gmail.com"
                     />
                   </div>
 

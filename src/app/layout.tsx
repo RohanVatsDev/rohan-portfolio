@@ -20,10 +20,13 @@ export const metadata: Metadata = {
   description: "Software Developer | AI & Full-Stack Innovator",
   keywords: ["Software Developer", "Full Stack", "AI", "Python", "Java", "Django"],
   creator: "Rohan Vats",
+  icons: {
+    icon: "/rohan.png", // ✅ Favicon set for deployment
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://rohanvats.com",
+    url: "https://rohanvats.codifyu.com", // ✅ Replace with your final domain
     title: "Rohan Vats | Software Developer",
     description: "Software Developer | AI & Full-Stack Innovator",
     siteName: "Rohan Vats Portfolio",
@@ -43,7 +46,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${spaceMono.variable} ${inter.variable}`}>
-      <ClientBody>{children}</ClientBody>
+      <head>
+        {/* 👇 Manual favicon link for local testing */}
+        <link rel="icon" href="/rohan.png" />
+      </head>
+      <body>
+        <ClientBody>{children}</ClientBody>
+      </body>
     </html>
   );
 }

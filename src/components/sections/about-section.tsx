@@ -95,48 +95,49 @@ export default function AboutSection() {
               }}
             />
 
-            {/* Contact Items positioned around the avatar */}
-            <ContactItem 
-              Icon={Mail} 
-              text="contact@rohanvats.com" 
-              href="mailto:contact@rohanvats.com"
-              position="top"
-              className="opacity-0 group-hover:opacity-100"
-            />
-            <ContactItem 
-              Icon={Phone} 
-              text="+91 234 567 8900" 
-              href="tel:+912345678900"
-              position="right"
-              className="opacity-0 group-hover:opacity-100"
-            />
-            <ContactItem 
-              Icon={MapPin} 
-              text="New Delhi, India" 
-              position="bottom"
-              className="opacity-0 group-hover:opacity-100"
-            />
-            <ContactItem 
-              Icon={Github} 
-              text="GitHub" 
-              href="https://github.com/"
-              position="left"
-              className="opacity-0 group-hover:opacity-100"
-            />
-            <ContactItem 
-              Icon={Linkedin} 
-              text="LinkedIn" 
-              href="https://linkedin.com/"
-              position="top-right"
-              className="opacity-0 group-hover:opacity-100"
-            />
-            <ContactItem 
-              Icon={Twitter} 
-              text="Twitter" 
-              href="https://twitter.com/"
-              position="bottom-left"
-              className="opacity-0 group-hover:opacity-100"
-            />
+           {/* Contact Items positioned around the avatar */}
+<ContactItem 
+  Icon={Mail} 
+  text="rohanvatscse2025@gmail.com" 
+  href="mailto:rohanvatscse2025@gmail.com"
+  position="top"
+  className="opacity-0 group-hover:opacity-100"
+/>
+<ContactItem 
+  Icon={Phone} 
+  text="+91 7903235478" 
+  href="tel:+917903235478"
+  position="right"
+  className="opacity-0 group-hover:opacity-100"
+/>
+<ContactItem 
+  Icon={MapPin} 
+  text="Bangalore, India" 
+  position="bottom"
+  className="opacity-0 group-hover:opacity-100"
+/>
+<ContactItem 
+  Icon={Github} 
+  text="GitHub" 
+  href="https://github.com/RohanVatsDev"
+  position="left"
+  className="opacity-0 group-hover:opacity-100"
+/>
+<ContactItem 
+  Icon={Linkedin} 
+  text="LinkedIn" 
+  href="https://linkedin.com/in/rohan-vats"
+  position="top-right"
+  className="opacity-0 group-hover:opacity-100"
+/>
+<ContactItem 
+  Icon={MapPin} 
+  text="Portfolio" 
+  href="https://rohanvats.dev"
+  position="bottom-left"
+  className="opacity-0 group-hover:opacity-100"
+/>
+
 
             {/* Image container with overlay effects */}
             <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-primary/30 shadow-lg shadow-primary/20 transition-all duration-300">
@@ -249,8 +250,8 @@ export default function AboutSection() {
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <InfoCard title="Education" content="B.Tech in Computer Science" subcontent="2019 - 2023" />
-              <InfoCard title="Experience" content="Software Developer Intern" subcontent="2022 - Present" />
+              <InfoCard title="Education" content="B.Tech in Computer Science" subcontent="2021 - 2025" />
+              <InfoCard title="Experience" content="Software Developer Intern" subcontent="2025 - Present" />
             </motion.div>
           </motion.div>
         </motion.div>

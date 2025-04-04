@@ -53,7 +53,7 @@ export default function Navbar() {
           href="#home"
           className="text-2xl font-bold gradient-text"
         >
-          Rohan Vats
+          
         </Link>
 
         {/* Desktop Navigation */}

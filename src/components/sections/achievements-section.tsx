@@ -7,31 +7,32 @@ import { Trophy, Users, Award, Calendar } from "lucide-react";
 // Achievement data
 const achievements = [
   {
-    year: "2023",
-    title: "Top 40 in National Coding Challenge",
-    description: "Secured a position in the top 40 among 5000+ participants in a nationwide coding competition, solving complex algorithmic problems.",
+    year: "2024",
+    title: "Winner – Agoric Fast Hack",
+    description: "🏆 Won ₹30,025 (350$) at my first-ever hackathon! A 36-hour marathon of coding and teamwork that taught me the power of perseverance. Pushed through challenges with my amazing team and claimed victory at midnight!",
     icon: <Trophy className="h-10 w-10 text-primary" />,
   },
   {
-    year: "2022",
-    title: "Google AI Workshop Participation",
-    description: "Selected to participate in Google's exclusive AI workshop, learning advanced machine learning techniques from industry experts.",
+    year: "2024",
+    title: "Top 40 – Code Conquest 1.0",
+    description: "Secured All India Rank 40 in Code Conquest 1.0, a national-level coding challenge among 5000+ participants. Solved tough algorithmic problems with focus and consistency.",
     icon: <Award className="h-10 w-10 text-primary" />,
   },
   {
-    year: "2021",
+    year: "2024",
+    title: "Google AI Event Attendee",
+    description: "Attended the 'Build with AI' event by Google Developers Group. Explored Google Cloud, Gemini, and Gen App Builder. Networked with AI enthusiasts and professionals from diverse domains.",
+    icon: <Users className="h-10 w-10 text-primary" />,
+  },
+  {
+    year: "2023",
     title: "Coding Club Leadership",
-    description: "Led the university coding club, growing membership from 15 to 60+ students and organizing weekly coding sessions and hackathons.",
+    description: "Led my college’s Coding Club in 2023, growing it from 15 to 60+ members. Conducted weekly problem-solving sessions, hackathons, and peer-to-peer learning activities.",
     icon: <Users className="h-10 w-10 text-primary" />,
     count: 60,
   },
-  {
-    year: "2020",
-    title: "Hackathon Winner",
-    description: "Won first place at the Inter-University Hackathon with an innovative solution for agricultural supply chain management.",
-    icon: <Trophy className="h-10 w-10 text-primary" />,
-  },
 ];
+
 
 export default function AchievementsSection() {
   const ref = useRef<HTMLDivElement>(null);
