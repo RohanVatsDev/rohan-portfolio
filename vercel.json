@@ -1,0 +1,6 @@
+{
+    "version": 2,
+    "skipBuild": true,
+    "buildCommand": "echo 'Skipping build'"
+  }
+  
